@@ -1,0 +1,42 @@
+<div class="cocheras-container">
+    <h2>Estado de las Cocheras</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Disponibilidad</th>
+          <th>Ingreso</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cochera of cocheras; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td (click)="cochera.disponibilidad === 'Disponible' ? openAssignModal(cochera) : openConfirmModal(cochera, 'enable')">
+            {{ cochera.disponibilidad }}
+          </td>
+          <td>{{ cochera.ingreso }}</td>
+          <td>
+            <button (click)="openConfirmModal(cochera, 'disable')">Deshabilitar</button>
+            <button (click)="openConfirmModal(cochera, 'delete')">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="openAssignModal({ id: 0, disponibilidad: 'Disponible', ingreso: null, egreso: null })">Agregar Cochera</button>
+  
+    <div *ngIf="showAssignModal" class="modal">
+      <h3>Asignar Vehículo a Cochera</h3>
+      <input [(ngModel)]="selectedCochera!.disponibilidad" placeholder="Patente" />
+      <button (click)="assignVehicle(selectedCochera!.disponibilidad)">Asignar</button>
+      <button (click)="showAssignModal = false">Cerrar</button>
+    </div>
+  
+    <div *ngIf="showConfirmModal" class="modal">
+      <h3>Confirmar Acción</h3>
+      <p>¿Estás seguro de que quieres {{ action }} esta cochera?</p>
+      <button (click)="confirmAction()">Confirmar</button>
+      <button (click)="showConfirmModal = false">Cancelar</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,23 @@
+<!-- src/app/reportes/reportes.component.html -->
+<div class="reportes-container">
+    <h2>Reportes de Cocheras</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Mes</th>
+          <th>Usos</th>
+          <th>Cobrado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reporte of reportes; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ reporte.mes }}</td>
+          <td>{{ reporte.usos }}</td>
+          <td>${{ reporte.cobrado.toFixed(2) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

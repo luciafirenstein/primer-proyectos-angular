@@ -1,0 +1,35 @@
+<div class="precios-container">
+    <h2>Precios de Cocheras</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Tiempo</th>
+          <th>Costo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let precio of precios">
+          <td>{{ precio.tiempo }}</td>
+          <td>${{ precio.costo.toFixed(2) }}</td>
+          <td>
+            <button (click)="editPrecio(precio)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="selectedPrecio" class="modal">
+      <h3>Editar Precio</h3>
+      <label>
+        Tiempo: {{ selectedPrecio.tiempo }}
+      </label>
+      <label>
+        Costo:
+        <input type="number" [(ngModel)]="selectedPrecio.costo" />
+      </label>
+      <button (click)="savePrecio()">Guardar</button>
+      <button (click)="cancelEdit()">Cancelar</button>
+    </div>
+  </div>
+  
